@@ -1,0 +1,2 @@
+https://mui.com/material-ui/customization/theming/#typescript
+You have to use module augmentation to add new variables to the Theme and ThemeOptions.

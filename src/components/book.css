@@ -1,0 +1,53 @@
+
+/* 
+BOOKS 
+*/
+.book-list * {
+    box-sizing: border-box;
+}
+
+.book-item {
+    margin-bottom: 1rem;
+}
+
+.book_image img {
+    height: 250px;
+    display: block;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.book_image:hover img {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.book_image a {
+    display: block;
+    position: relative;
+    left: 10%;
+}
+
+.book_name:hover {
+    text-decoration: none;
+    color: #d95555;
+}
+
+a {
+    text-decoration: none;
+    color: slateblue;
+}
+
+.book_info {
+    padding-top: 1rem;
+    max-width: 80%;
+    overflow: auto;
+}
+
+.book-list .row .col-3 {
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .book-list .row .col-3 {
+        width: 50%;
+    }
+}

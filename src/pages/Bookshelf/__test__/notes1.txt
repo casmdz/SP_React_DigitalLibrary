@@ -1,0 +1,106 @@
+Can you show me now how I can display data on a bookshelf page of all the books in the database, and be able to click a checkmark to open the link to the update form? 
+
+
+BookShelfPage.tsx: 
+
+import { Box, Button, Card, CardMedia, Container, Grid, Stack, Typography } from '@mui/material';
+import Book from '../../components/BookUI';
+import '../../components/book.css'
+import bookData from '../About/examplebooks.json'
+import BookModal from './components/BookModal';
+import { useState } from 'react';
+import { server_calls } from '../../api/server';
+
+export default function BookshelfPage() {
+  const [ isModalOpen, setModalOpen ] = useState(false);
+  const [formType, setFormType] = useState<"add" | "update" | "delete" | null>(null);
+  const handleOpenModal = (type: "add" | "update" | "delete") => {
+    console.log('Opening modal with type:', type);
+    if (type === "add") {
+      setModalOpen(true);
+      setFormType(type);
+    } else if (type === "update") {
+      setModalOpen(true);
+      setFormType(type);
+    } else {
+      setModalOpen(true);
+      setFormType(type);
+    }
+  }
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  }
+  const getData = async () => {
+    const result = await server_calls.get();
+    console.log(result)
+}
+return (
+  <>
+  <Container>
+<Box className='bg-stone-100 py-4 m-7'>
+<Stack direction="row" spacing={2}>
+  <Button variant='contained' color='info' onClick={() => handleOpenModal("add")}>
+    Add New Book
+  </Button>
+  <Button variant='contained' color='info' onClick={() => handleOpenModal("update")}>
+    Update a book
+  </Button>
+  <Button variant='contained' color='warning' onClick={getData}>Get Data</Button>
+</Stack>
+{/* </Grid> */}
+</Box>
+<div className=' p-5 mb-1 text-center'>
+<Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+  // ... how to display books with a checkmark? 
+<Book {...book} />
+</Grid>
+</div>
+    <BookModal open={isModalOpen} onClose={handleCloseModal} formType={formType}/>
+  </Container>
+  </>
+  )
+}
+
+----------------------------------------------------------------
+BookUI.tsx: 
+
+import './book.css'
+interface BookProps {
+    imageSrc: string;
+    linkUrl: string | undefined ;
+    title: string;
+    author: string;
+    published: string;
+    format: string;
+    isbn: string;
+    genre: string[];
+}
+
+export default function Book (props : BookProps ) {
+return (
+<div className="col-3 book-item">
+<div className="book_image">
+<a href={props.linkUrl} title={`Download: ${props.title}`} target="_blank">
+    <img src={props.imageSrc} alt={props.title} />
+</a>
+</div>
+
+<div className="book_info">
+<Typography variant='h5' component='h2' className="book_name-detail">
+    <a className="book_name" href={props.linkUrl} target="_blank">
+    {props.title}
+</a>
+</Typography>
+
+<p className="book_author">Author: {props.author}</p>
+<p className="book_pub">Published: {props.published}</p>
+<p className="book_format">Format: {props.format}</p>
+<p className="book_isbn">ISBN: {props.isbn}</p>
+<p className="book_genre">Genre: {props.genre.join(', ')}</p>
+<a className="book_get disabled" href="#">
+    Add to list
+</a>
+</div>
+</div>
+  )
+};
