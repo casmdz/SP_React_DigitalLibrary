@@ -3,8 +3,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const bookSlice = createSlice({
-    name: "bookRoot",
+    name: "book",
     initialState: {title: "Title", author:  "Author", publishing: "Publishing", format: "Format", isbn: "ISBN", genre: "Genre" },
+    // reducers: {
+    //     updateBook: (state, action) => {
+    //       return { ...state, ...action.payload };
+    //     },
+    //   },
     reducers: {
         chooseTitle: (state, action) => { state.title = action.payload },
         chooseAuthor: (state, action) => { state.author = action.payload },

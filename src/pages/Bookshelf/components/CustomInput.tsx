@@ -2,8 +2,8 @@ import { TextField } from '@mui/material'
 import { forwardRef } from 'react'
 
 interface InputType {
-    name: string,
-    placeholder: string
+    name: string;
+    placeholder?: string;
 }
 
 const CustomInput = forwardRef(( props: InputType, ref) => {

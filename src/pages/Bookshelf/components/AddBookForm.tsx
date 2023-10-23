@@ -2,16 +2,13 @@
 // https://thecodingcowboy.notion.site/ContactForm-Input-Server-Calls-de72c6e29f3d4c8ba63703904eeeada3
 
 // import { useSubmit } from 'react-router-dom'
+// import { useDispatch, useStore } from 'react-redux';
 import CustomInput from './CustomInput'
-
 import { useForm } from 'react-hook-form'
-import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import { Box } from '@mui/material';
 
 import { server_calls } from '../../../api/server';
-import { useDispatch, useStore } from 'react-redux';
 import '../../../redux/RootSlice'
-import { chooseAuthor, chooseFormat, chooseGenre, chooseISBN, choosePublishing, chooseTitle } from '../../../redux/RootSlice';
 
 
 interface AddBookFormProps {
@@ -22,26 +19,24 @@ interface AddBookFormProps {
 
 const AddBookForm = ( props: AddBookFormProps) => {
 
-    const [ isOpen, setIsOpen ] = useState(false)
     const { register, handleSubmit } = useForm({})
     const { inputFields, buttons, input } = props.styles;
+    // const dispatch = useDispatch();
+    // const store = useStore();
 
-    const dispatch = useDispatch();
-    const store = useStore();
-
-//  event: any
-    const onSubmit = ( data: any) => {
-        console.log('whaat')
-        console.log(`ID: ${props.id}`)
-        dispatch(chooseTitle(data.title));
-        dispatch(chooseAuthor(data.author)); 
-        dispatch(choosePublishing(data.publishing));
-        dispatch(chooseFormat(data.format));
-        dispatch(chooseISBN(data.isbn));
-        dispatch(chooseGenre(data.genre));
-
-        server_calls.create(store.getState());
-        
+//  typescript wants a type 
+    const onSubmit = (data: any) => {
+        console.log('form submit button event')
+        server_calls.create(data)
+            .then((response) => {
+                console.log('API response:', response);
+            })
+            .catch((error) => {
+                console.error('Error creating data:', error);
+            });
+        console.log('just created ', data);
+        alert(JSON.stringify(data));
+        setTimeout( () => { window.location.reload() }, 500 )
     }
 
   return (
@@ -74,15 +69,17 @@ const AddBookForm = ( props: AddBookFormProps) => {
                     <label htmlFor='genre'>Genre</label>
                     <CustomInput {...register('genre')} name='genre' placeholder="Programming" />
                 </div>
-                {/* <div>
-                    <label htmlFor='x'>Book x</label>
-                    <CustomInput {...register('x')} name='x' placeholder="x" />
-                </div> */}
             </Box>
 
               <div style={buttons}>
                   <input style={input} type="submit" value="SUBMIT" />
-                  <Button variant="outlined" color="error" disableElevation onClick={() => setIsOpen(!isOpen)}>Cancel</Button>
+                  {/* <Button variant="outlined" color="error" disableElevation onClick={() => setIsOpen(!isOpen)}>Cancel</Button> */}
+                  {/* <Button variant="outlined" color="error" disableElevation 
+                  onClick={() => {
+                    console.log('Cancel button clicked');
+                    props.onClose;
+                  }} 
+                  >Cancel</Button> */}
               </div>
 
         </form>

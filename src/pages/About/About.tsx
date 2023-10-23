@@ -24,7 +24,6 @@ export default function AboutPage() {
           <div className='container p-5 mb-1 text-center'>
             <Typography variant='h4' gutterBottom>Are you an avid reader, always on the lookout for your next literary adventure? Love cuteness and cat puns? Look no further than Check Meowt, a site for your favorite book lists.</Typography>
             <Typography variant='h6' gutterBottom><b>How It Works</b></Typography>
-            <Typography variant='body1'>
               <ul className='leading-8'>
                 <li>Book Discovery: Explore a vast collection of books spanning various genres. Find your next page-turner with
                   ease.</li>
@@ -37,7 +36,7 @@ export default function AboutPage() {
                 <li>Personal Library: Create your virtual bookshelf. Keep track of books you've read, want to read, or are
                   currently reading.</li>
               </ul>
-            </Typography>
+           
           </div>
 
           <div className='flex justify-center pb-5'>

@@ -26,12 +26,31 @@ BOOKS
     left: 10%;
 }
 
+.ubook-item {
+    margin-bottom: 1rem;
+}
+
+.ubook_image img {
+    height: 150px;
+    object-fit: contain;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.ubook_image:hover img {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+
 .book_name:hover {
     text-decoration: none;
     color: #d95555;
 }
 
 a {
+    text-decoration: none;
+    color: slateblue;
+}
+.book_name {
     text-decoration: none;
     color: slateblue;
 }

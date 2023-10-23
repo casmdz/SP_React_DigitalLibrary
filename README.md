@@ -1,7 +1,7 @@
 # React Project: Building the Front End of our Flask Project
 
 Create a react application using the Flask API you created a few weeks back. 
-
+ 
 Your project should include:
 
 - 4-5 Components (Home, Dashboard, etc)
@@ -31,7 +31,8 @@ Stuff i'm using, references, and some notes to myself:
 - [MUI components ](https://mui.com/material-ui/getting-started/)
 - [Carousel UI Component](https://www.npmjs.com/package/react-material-ui-carousel) using MUI made by Learus 
 - [Redux](https://redux.js.org/introduction/getting-started) state management library. [info](#redux) 
-- other stuff 
+- "My JSON Server" - Helpful [site](https://my-json-server.typicode.com/casmdz/fakelibrarydata) that i can pretend to be getting data from a server
+-  React [Lifecycle methods](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) diagram 
 
 
 

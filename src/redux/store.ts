@@ -3,7 +3,7 @@ import booksReducer from './RootSlice'
 
 export default configureStore({
     reducer: {
-        books: booksReducer, //TODO check if correct syntax 
+        book: booksReducer, 
     },
     devTools: true,
 }

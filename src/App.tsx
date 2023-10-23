@@ -1,10 +1,10 @@
 import './index.css'
-import Navbar from './components/global/Navbar'
+import Navbar from './components/__test__/Navbar' // TODO update official navbar
 import Footer from './components/global/Footer'
 // import About from './pages/About/About'
 // import Home from './pages/Home/Home'
-// import LoginPage from './pages/Auth/LoginPage'
-// import RegisterPage from './pages/Auth/RegisterPage'
+import LoginPage from './pages/Auth/LoginPage'
+import RegisterPage from './pages/Auth/RegisterPage'
 // import ProfilePage from './pages/Auth/ProfilePage'
 
 import { Route, Routes } from 'react-router-dom'
@@ -28,8 +28,8 @@ function App() {
             />
           ))}
         <Route path="/bookshelf" element={<BookshelfPage />} />
-          {/* <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} /> */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         </Routes>
       <br style={{ marginTop: '70px'}}/>
       <Footer/>
