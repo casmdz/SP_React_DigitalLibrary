@@ -1,6 +1,6 @@
-export interface Book { 
-    id: string;
-    linkUrl?: string | undefined;
+export interface Book {
+    bookworm?: string | undefined; 
+    id: number;
     imageSrc?: string;
     title: string;
     author: string;

@@ -4,6 +4,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 import AddBookForm from "./AddBookForm";
 import UpdateBookForm from "./UpdateBookForm";
+import { useGetBooks } from "../hooks/FetchData";
 
 
 export const styles = {
@@ -12,20 +13,17 @@ export const styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    // width: 450,
+    width: "50%",
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
+    maxHeight: '80%',
+    overflowY: 'scroll'
   },
   inputFields: {
     display: 'flex',
     flexDirection: 'column',
-    // margin:"none",
-    // marginTop: '20px',
-    // marginBottom: '5px',
-    // '.MuiInputRoot': {
-    //     marginBottom: '2px',
-    // },
     gap: '1em',
   },
   buttons: {
@@ -33,8 +31,6 @@ export const styles = {
     justifyContent: 'end',
     gap: 4,
     marginTop: '1rem',
-    // variant: 'contained',
-
   },
   input: {
     background: "#ec5990",  // pink
@@ -49,8 +45,7 @@ interface BookModalProps {
   open: boolean;
   onClose?: () => void;
   formType?: "add" | "update" | "delete" | null;
-  selectedBookId: string | null;
-  // bookData?: BookData;
+  selectedBookId: number | null;
 }
 
 
@@ -61,9 +56,28 @@ const BookModal = (props: BookModalProps) => {
   //   setIsOpen(false)
   // }
 
+  const { bookData } = useGetBooks();
+
   let title = "";
   let description = "";
   let formContent = null;
+  let initialValues = {};
+
+  if (props.selectedBookId) {
+    const selectedBook = bookData.find((book) => book.id === props.selectedBookId);
+    if (selectedBook) {
+      initialValues = {
+        title: selectedBook.title,
+        author: selectedBook.author,
+        publishing: selectedBook.publishing,
+        format: selectedBook.format,
+        isbn: selectedBook.isbn,
+        genre: selectedBook.genre || [],
+        imageSrc: selectedBook.imageSrc,
+      };
+    }
+  }
+
 
   switch (props.formType) {
     case "add":
@@ -71,9 +85,8 @@ const BookModal = (props: BookModalProps) => {
       formContent = <AddBookForm styles={styles}/>;
       break;
     case "update":
-      title = "Update Book You Have";
-      description = `Making changes to book ${props.selectedBookId}`;
-      formContent = <UpdateBookForm styles={styles} selectedBookId={props.selectedBookId || null}/>;
+      title = `Update Book Id: ${props.selectedBookId}`;
+      formContent = <UpdateBookForm styles={styles} selectedBookId={props.selectedBookId} initialValues={initialValues}/>;
       break;
     default:
       title = "Book Form";

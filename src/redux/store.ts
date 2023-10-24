@@ -1,13 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import booksReducer from './RootSlice'
+// import rootReducer from './RootSlice'
+import booksReducer from './booksSlice'
 
-export default configureStore({
+export const store = configureStore({
     reducer: {
-        book: booksReducer, 
+        books: booksReducer,
     },
     devTools: true,
 }
 )
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch
+// https://redux.js.org/usage/usage-with-typescript 
 
 // store is like an mini temporary in-the-middle database
 // compontents can access the store 

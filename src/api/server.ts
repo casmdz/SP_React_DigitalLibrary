@@ -13,8 +13,7 @@ export const server_calls = {
             }
         }); 
         if (!response.ok){
-            console.log('Failed to get')
-            throw new Error('failed to fetch data from the server')
+            throw new Error('failed to FETCH data from the server')
         }
         return await response.json()
     },
@@ -30,7 +29,7 @@ export const server_calls = {
             });
 
             if (!response.ok) {
-                throw new Error(`Failed to create new data on the server. Status: ${response.status} ${response.statusText}`);
+                throw new Error(`Failed to CREATE new data on the server. Status: ${response.status} ${response.statusText}`);
             }
 
             return await response.json();
@@ -39,8 +38,8 @@ export const server_calls = {
             throw error; 
         }
     },
-
-    update: async (id: string, data: any ={}) => {
+    // TODO or DEBUG added null 
+    update: async (id: number | null, data: any ={}) => {
         const response = await fetch (`https://check-meowt.onrender.com/api/books/${id}`,
         {
             method: "POST",
@@ -52,7 +51,7 @@ export const server_calls = {
             body: JSON.stringify(data) 
         }) 
         if (!response.ok) {
-            throw new Error('Failed to update data on the server.')
+            throw new Error('Failed to UPDATE data on the server.')
         }
         return await response.json()
     },
@@ -68,7 +67,7 @@ export const server_calls = {
             },
         }) 
         if (!response.ok){
-            throw new Error('Failed to delete data on the server') 
+            throw new Error('Failed to DELETE data on the server') 
         }
         return;
     },

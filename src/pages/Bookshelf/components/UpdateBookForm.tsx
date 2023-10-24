@@ -1,111 +1,64 @@
 // How this works:
 // https://thecodingcowboy.notion.site/ContactForm-Input-Server-Calls-de72c6e29f3d4c8ba63703904eeeada3
 
-// import { useSubmit } from 'react-router-dom'
-// import { useDispatch, useStore } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import CustomInput from "./CustomInput";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Box } from "@mui/material";
 
 import { server_calls } from "../../../api/server";
-import "../../../redux/RootSlice";
+import { Book } from '../hooks/booktype'
+import { useDispatch, useStore } from 'react-redux';
+import { updateBook } from '../../../redux/booksSlice';
 
-import {Book} from '../hooks/booktype'
-
-// import {useGetBooks} from '../hooks/FetchData'
 
 
 interface UpdateFormProps {
-  selectedBookId: string | null;
+  selectedBookId: number | null;
   styles?: any;
+  initialValues: Partial<Book>;
 }
 
-// type FormValues ={
-//     book: Book;
-// }
 
-// const UpdateBookForm = ({ book, styles}: UpdateFormProps) => {
-const UpdateBookForm = ( props : UpdateFormProps) => {
-    
-  const { register, handleSubmit, setValue } = useForm({});
-//   const { register, handleSubmit, setValue } = useForm<FormValues>({});
+const UpdateBookForm = (props: UpdateFormProps) => {
 
+  const { register, handleSubmit, setValue } = useForm();
   const { inputFields, buttons, input } = props.styles;
-  const [bookData, setBookData] = useState<Book | null>(null);
 
-//   const { getBookById } = useGetBooks()
+  const dispatch = useDispatch();
+  const store = useStore();
+  // https://react-hook-form.com/docs/useform/setvalue
 
 
-  // const dispatch = useDispatch();
-  // const store = useStore();
-// https://react-hook-form.com/docs/useform/setvalue
-
-useEffect(() => {
-    if (props.selectedBookId) {
-      // Use the getBookById function to fetch the book data
-      server_calls.get()
-        .then((data) => {
-          setBookData(data);
-          if (data) {
-            setValue('title', data.title);
-            setValue('author', data.author);
-            setValue('publishing', data.publishing);
-            setValue('format', data.format);
-            setValue('isbn', data.isbn);
-            setValue('genre', data.genre);
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching book data:", error);
-        });
+  useEffect(() => {
+    if (props.initialValues) {
+      setValue('title', props.initialValues.title);
+      setValue('author', props.initialValues.author);
+      setValue('publishing', props.initialValues.publishing);
+      setValue('format', props.initialValues.format);
+      setValue('isbn', props.initialValues.isbn);
+      setValue('genre', props.initialValues.genre);
+      setValue('imageSrc', props.initialValues.imageSrc);
     }
-  }, [props.selectedBookId, setValue]);
+  }, [props.initialValues, setValue]);
 
-
-
-
-// useEffect(() => {
-//   if (props.id) {
-//     server_calls.get(props.id)
-//       .then((data) => {
-//         setBookData(data);
-//         if (data) {
-//           setValue("author", data.author);
-//           setValue("publishing", data.publishing);
-//           // Set values for other fields accordingly
-//         }
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching book data:", error);
-//       });
-//   }
-// }, [props.id, setValue]);
-
-//   useEffect(()=> {
-//     if (props.id) {
-//         Object.entries(props.id).forEach(([key, value]) => {
-//             setValue(key,value);
-//         });
-//     }
-//   }, [props.id, setValue])
-
-
-  //  typescript wants a type
-  const onSubmit = (data: any) => {
-    console.log("form submit button event");
-    server_calls.update(data)
-      .then((response) => {
-        console.log("API response:", response);
-      })
-      .catch((error) => {
-        console.error("Error creating data:", error);
-      });
-    console.log("just created ", data);
-    alert(JSON.stringify(data));
-    setTimeout(() => {window.location.reload();}, 500);
+  const onSubmit = async (data: any) => {
+    try {
+      if (props.selectedBookId !== null) {
+        await server_calls.update(props.selectedBookId, data);
+        dispatch(updateBook({ id: props.selectedBookId, updatedData: data }));
+        console.log("current state: ", store.getState());
+        alert(JSON.stringify(data));
+      } else {
+        console.error("Selected book ID is null.");
+      }
+    } catch (error) {
+      console.error("Error updating the book:", error);
+    }
   };
+  
+
 
   return (
     <div>
@@ -113,7 +66,7 @@ useEffect(() => {
         <Box style={inputFields}>
           <div style={inputFields}>
             <label htmlFor='title'>Book Title</label>
-            <CustomInput {...register('title')} name='title' placeholder="Python Crash Course"/>
+            <CustomInput {...register('title')} name='title' placeholder="Python Crash Course" />
           </div>
           <div style={inputFields}>
             <label htmlFor="author">Book Author</label>
@@ -135,10 +88,11 @@ useEffect(() => {
             <label htmlFor="genre">Genre</label>
             <CustomInput {...register("genre")} name="genre" placeholder="Programming" />
           </div>
-          {/* <div>
-                    <label htmlFor='x'>Book x</label>
-                    <CustomInput {...register('x')} name='x' placeholder="x" />
-                </div> */}
+          <div style={inputFields}>
+            <label htmlFor='imageSrc'>Image LINK</label>
+            <CustomInput {...register('imageSrc')} name='imageSrc' placeholder="https://websiteimages.com/images/BookCoverImage.jpg" />
+          </div>
+
         </Box>
 
         <div style={buttons}>

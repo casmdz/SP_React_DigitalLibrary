@@ -2,35 +2,31 @@ import { Card, CardMedia, Typography } from '@mui/material';
 // import './book.css'
 import '../../components/book.css'
 import { Book } from './hooks/booktype';
+import { useState } from 'react';
+import { Radio } from '@mui/material';
 
 
-// interface UserBookProps {
-//   imageSrc?: string;
-//   linkUrl?: string | undefined;
-//   title?: string;
-//   author?: string;
-//   published?: string;
-//   format?: string;
-//   isbn?: string;
-//   genre?: string[];
-// }
 
 interface UserBooksProps {
   book: Book;
+  bookworm?: string | undefined;
   // onSelect: (bookId: string) => void;
-  onSelect: () => void;
+  onSelect: (id:number) => void;
 }
 
 
 // const UserBooksUI: React.FC<{ book: Book }> = ({ book }) => {
-const UserBooksUI = ({ book, onSelect }: UserBooksProps) => {
+const UserBooksUI = ({ book, onSelect, bookworm }: UserBooksProps) => {
+  const [isSelected, setIsSelected] = useState(false);
 
-  // const handleBookSelect = () => {
-  //   onSelect(book.id);
-  // }
+  const handleSelect = () => {
+    setIsSelected(!isSelected);
+    onSelect(book.id); // TODO Pass the book ID to the parent component
+  };
 
   return (
-    <div className="ubook-item" onClick={onSelect}>
+    <div className="ubook-item">
+    {/* <div className="ubook-item" onClick={onSelect}> */}
       {/* handleBookSelect
        */}
       <Card className="book-item" 
@@ -53,10 +49,10 @@ const UserBooksUI = ({ book, onSelect }: UserBooksProps) => {
           <Typography className="book_format">Format: {book.format}</Typography>
           <Typography className="book_isbn">ISBN: {book.isbn}</Typography>
           <Typography className="book_genre">Genre: {book.genre}</Typography>
-
+          <Typography className='book_owner' variant='caption'>In the library of: {bookworm}</Typography>
         </div>
       </Card>
-
+      <Radio color='success' checked={isSelected} onChange={handleSelect} inputProps={{"aria-label": book.title}} />
     </div>
   )
 }
