@@ -18,6 +18,7 @@ interface UpdateFormProps {
   selectedBookId: number | null;
   styles?: any;
   initialValues: Partial<Book>;
+  onClose: () => void;
 }
 
 
@@ -49,7 +50,10 @@ const UpdateBookForm = (props: UpdateFormProps) => {
         await server_calls.update(props.selectedBookId, data);
         dispatch(updateBook({ id: props.selectedBookId, updatedData: data }));
         console.log("current state: ", store.getState());
-        alert(JSON.stringify(data));
+        alert("Your book was updated!\n" + JSON.stringify(data, null, 4));
+        // todo reload the content
+        props.onClose();
+        setTimeout( () => { window.location.reload() }, 500 )
       } else {
         console.error("Selected book ID is null.");
       }

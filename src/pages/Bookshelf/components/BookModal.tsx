@@ -43,7 +43,7 @@ export const styles = {
 
 interface BookModalProps {
   open: boolean;
-  onClose?: () => void;
+  onClose: () => void;
   formType?: "add" | "update" | "delete" | null;
   selectedBookId: number | null;
 }
@@ -82,11 +82,11 @@ const BookModal = (props: BookModalProps) => {
   switch (props.formType) {
     case "add":
       title = "Add Book";
-      formContent = <AddBookForm styles={styles}/>;
+      formContent = <AddBookForm styles={styles} onClose={props.onClose}/>;
       break;
     case "update":
       title = `Update Book Id: ${props.selectedBookId}`;
-      formContent = <UpdateBookForm styles={styles} selectedBookId={props.selectedBookId} initialValues={initialValues}/>;
+      formContent = <UpdateBookForm styles={styles} selectedBookId={props.selectedBookId} initialValues={initialValues} onClose={props.onClose}/>;
       break;
     default:
       title = "Book Form";

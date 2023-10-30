@@ -1,6 +1,6 @@
 // https://github.com/casmdz/SP_DigitalLibrary/blob/main/app/api/routes.py
 
-const token = 'be84dcf573b84f8108cea8c871b27fb0e15713c61dea0617'
+const token = 'f5350f8690235ce896bed2d08b246424e198f8916982de08'
 
 export const server_calls = {
     get: async () => {

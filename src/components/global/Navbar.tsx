@@ -8,13 +8,14 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AccountCircle } from "@mui/icons-material";
 
-// import { useState } from "react";
-
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 
-const public_pages = ["home", "about", "bookshelf"];
+const public_pages = ["home", "about", "bookshelf", "test"];
+
+const signedOut = ["login", "register"]
+
 
 
 export default function Navbar() {
@@ -42,7 +43,6 @@ export default function Navbar() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
   };
-
 
 
   return (
@@ -112,6 +112,13 @@ export default function Navbar() {
                 </MenuItem>
               ))}
 
+              {signedOut.map((p) => (
+                <MenuItem key={p} onClick={handleCloseNavMenu}>
+                  <NavLink key={p} to={p}>{p}</NavLink>
+                </MenuItem>
+              ))}
+
+
             </Menu>
           </Box>
 
@@ -128,15 +135,11 @@ export default function Navbar() {
           >Check Meowt
           </Typography>
 
-          {/* this is the list of public_pages */}
-
-            {/* { isVisible ? (  */}
-          
+          {/* this is the list of public_pages */}          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
-              {public_pages.map((page) => (
+              {public_pages.map((page, index) => (
               <NavLink
-                key={page}
+                key={index}
                 to={page}
                 onClick={handleCloseNavMenu}
                 style={({ isActive, isPending }) => {
@@ -146,16 +149,13 @@ export default function Navbar() {
                 {page}
               </NavLink>
             ))}
+            {signedOut.map((p, index) => (
+              <NavLink key={index} to={p} style={({ isActive, isPending }) => {
+                return { marginInlineStart: '2rem', fontWeight: isActive ? "bold" : "", color: isPending ? "green" : "white", };
+              }} > {p}
+              </NavLink>
+            ))}
             </Box>
-
-{/*             // ) : ( 
-
-            // <> </> 
-
-            // ) }
-             */}
-
-
 
           {/* right hand side button */}
           
@@ -187,18 +187,19 @@ export default function Navbar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
-                <MenuItem onClick={handleCloseUserMenu}>My account</MenuItem>
+                <MenuItem key="myself" onClick={handleCloseUserMenu}>
+                <NavLink key="profile" to="/profile">profile</NavLink>
+                </MenuItem>
+                <MenuItem key="mybooks" onClick={handleCloseUserMenu}>
+                  <NavLink key="bookshelf" to="/bookshelf">my books</NavLink>
+                </MenuItem>
               </Menu>
             </Box >
           )}
-
-
         </Toolbar>
       </Container>
     </AppBar>
     </Box>
-    // {/* </> */}
 
   )
 }

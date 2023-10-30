@@ -18,11 +18,29 @@ interface UserBooksProps {
 // const UserBooksUI: React.FC<{ book: Book }> = ({ book }) => {
 const UserBooksUI = ({ book, onSelect, bookworm }: UserBooksProps) => {
   const [isSelected, setIsSelected] = useState(false);
+  const [value, setValue ] = useState("a");
 
   const handleSelect = () => {
     setIsSelected(!isSelected);
     onSelect(book.id); // TODO Pass the book ID to the parent component
-  };
+    }
+
+// const UserBooksUI = ({ book, onSelect, bookworm }: UserBooksProps) => {
+  // const [isSelected, setIsSelected] = useState(false);
+  // const [value, setValue ] = useState("a");
+
+  // const handleSelect = (e:any) => {
+  //   if ( e.target.value === value ) {
+  //     setValue("");
+  //   } else{
+  //     setValue(e.target.value)
+  //     setIsSelected(!isSelected);
+  //     onSelect(book.id); // TODO Pass the book ID to the parent component
+  //   }
+  // };
+
+  
+  
 
   return (
     <div className="ubook-item">
@@ -52,7 +70,7 @@ const UserBooksUI = ({ book, onSelect, bookworm }: UserBooksProps) => {
           <Typography className='book_owner' variant='caption'>In the library of: {bookworm}</Typography>
         </div>
       </Card>
-      <Radio color='success' checked={isSelected} onChange={handleSelect} inputProps={{"aria-label": book.title}} />
+      <Radio color='success' checked={isSelected} onChange={handleSelect} value="button" inputProps={{"aria-label": book.title}} />
     </div>
   )
 }

@@ -6,11 +6,11 @@ import { useForm } from "react-hook-form";
 import { Box } from "@mui/material";
 
 import { server_calls } from "../../../api/server";
-import "../../../redux/RootSlice";
 import { addBook } from "../../../redux/booksSlice";
 import { useDispatch, useStore } from "react-redux";
 
 interface AddBookFormProps {
+  onClose: () => void;
   id?: string[];
   styles?: any;
 }
@@ -26,7 +26,9 @@ const AddBookForm = (props: AddBookFormProps) => {
       await server_calls.create(data);
       dispatch(addBook(data));
       console.log("current state: ", store.getState());
-      alert(JSON.stringify(data));
+      alert("You just created a book!\n" + JSON.stringify(data, null, 4));
+      props.onClose();
+      setTimeout( () => { window.location.reload() }, 500 )
     } catch (error) {
       console.error("Error creating the book:", error);
     }

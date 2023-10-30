@@ -1,0 +1,58 @@
+https://github.com/casmdz/DigitalLibrary_Render/blob/main/app/authentication/routes.py
+
+
+
+@auth.route('/register', methods=['GET','POST'])
+def register():
+form = UserRegistrationForm()
+try:
+if request.method == 'POST': 
+if form.validate_on_submit():
+
+    first_name = form.first_name.data
+    last_name = form.last_name.data
+    username = form.username.data
+    email = form.email.data
+    password = form.password.data
+
+    user = User(email=email, username=username, first_name=first_name, last_name=last_name, password=password, image_file='defaultuser.png')
+
+    db.session.add(user)
+    db.session.commit()
+
+
+server sided sessions 
+
+so the server can keep the session
+returns a cookie 
+
+
+
+test 5
+set-cookie
+	session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiZDRmZTM2OTZkZjYxOWRlODE4OTRmZDhjN2RhNTM4MzVjN2NlN2M0MCJ9.ZTmyPQ.ZLuVfKLGay6GxnxuyiQfec5SNFc; HttpOnly; Path=/
+
+Oct 25 07:35:38 PM  Error in field "csrf_token": The CSRF token is missing.
+
+still missing. even though it runs fine on my render 
+
+it does not run on my rest api 
+
+
+Oct 25 07:54:19 PM  test testonrender oct25testrender testonrender@test.com test  Successfully signed up
+Oct 25 07:54:19 PM  You have successfully created a user account oct25testrender User-created
+Oct 25 07:54:19 PM  127.0.0.1 - - [26/Oct/2023:00:54:19 +0000] "POST /register HTTP/1.1" 302 199 "https://check-meowt.onrender.com/register" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0"
+
+
+
+if a safer solution doesn't work, then i'll just exclude views from protection
+https://flask-wtf.readthedocs.io/en/0.15.x/csrf/#exclude-views-from-protection
+
+session=eyJjc3JmX3Rva2VuIjoiOTcwOWRmZDRkZThkYTA1Nzk0M2I1Nzk4MGMxZjQ4NmRiM2FiMDc4NyJ9.ZTv8Bw.o6QKQUCYXggE449j0Qg_UMWMOLU; HttpOnly; Path=/
+
+
+
+
+https://react.dev/learn/managing-state#extracting-state-logic-into-a-reducer
+Extracting state logic into a reducer
+Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called “reducer”. Your event handlers become concise because they only specify the user “actions”. At the bottom of the file, the reducer function specifies how the state should update in response to each action!

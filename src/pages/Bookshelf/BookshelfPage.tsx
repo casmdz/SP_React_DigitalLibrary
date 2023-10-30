@@ -8,18 +8,20 @@ import BookModal from './components/BookModal';
 import { useEffect, useState } from 'react';
 import { useGetBooks } from './hooks/FetchData';
 import { Book } from './hooks/booktype';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 
 export default function BookshelfPage() {
 
-  // const books = useSelector((state: RootState) => state.books.books);
   // console.log('bookshelf page printing "books" useSelector', books)
-
+  
   const { bookData } = useGetBooks() // from fetch data
   useEffect(() => {
     console.log("bookData:", bookData); 
   }, [bookData]); // Log when bookData changes
+  
+  const books = useSelector((state: RootState) => state.books.books);
 
   // const [ selectedBookId, setSelectedBookId ] = useState<number[]>([]);
   // const [ selectedBookId, setSelectedBookId ] = useState(null);
@@ -47,7 +49,6 @@ export default function BookshelfPage() {
       setFormType(type);
     }
   }
-
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -98,21 +99,41 @@ export default function BookshelfPage() {
         </div>
       ))
     ) : 
-    ( bookData.map((b: Book)=>(
-      <Grid item xs={12} sm={4} md={4} className='m-1 p-8 '>
-        <UserBooksUI key={b.id} book={b} bookworm={b.bookworm} onSelect={toggleSelectedBook} />
-        {/* <UserBooksUI key={b.id} book={b} onSelect={() => handleOpenModal("update", b.id)} /> */}
-        {/* <Radio value="hello" /> */}
-      </Grid>
+    (
+      books.map((b) => (
+        <Grid item xs={12} sm={4} md={4} className='m-1 p-8'>
+          <UserBooksUI key={b.id} book={b} bookworm={b.bookworm} onSelect={toggleSelectedBook} />
+        </Grid>
       ))
     )}
+    {bookData.map((b: Book) => (
+      <Grid item xs={12} sm={4} md={4} className='m-1 p-8'>
+        <UserBooksUI key={b.id} book={b} bookworm={b.bookworm} onSelect={toggleSelectedBook} />
+      </Grid>
+    ))}
+
+
+ {/* <UserBooksUI key={b.id} book={b} onSelect={() => handleOpenModal("update", b.id)} /> */}
+        {/* <Radio value="hello" /> */}
+
+        
+    {/* 
+        ( bookData.map((b: Book)=>(
+      <Grid item xs={12} sm={4} md={4} className='m-1 p-8 '>
+        <UserBooksUI key={b.id} book={b} bookworm={b.bookworm} onSelect={toggleSelectedBook} />
+
+        </Grid>
+      ))
+    )}
+    
+    */}
 
       </Grid>
       </div>
     </Box>
-
-    <BookModal open={isModalOpen} onClose={handleCloseModal} formType={formType} selectedBookId={selectedBookId}/>
-
+{isModalOpen && ( 
+      <BookModal open={isModalOpen} onClose={handleCloseModal} formType={formType} selectedBookId={selectedBookId}/>
+)}
   </Container>
   </>
   )
