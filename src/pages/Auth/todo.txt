@@ -56,3 +56,115 @@ session=eyJjc3JmX3Rva2VuIjoiOTcwOWRmZDRkZThkYTA1Nzk0M2I1Nzk4MGMxZjQ4NmRiM2FiMDc4
 https://react.dev/learn/managing-state#extracting-state-logic-into-a-reducer
 Extracting state logic into a reducer
 Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called “reducer”. Your event handlers become concise because they only specify the user “actions”. At the bottom of the file, the reducer function specifies how the state should update in response to each action!
+
+
+
+ use inputRef={whateverRef} instead of ref={whateverRef} as the TextField attribute.
+
+
+
+
+
+
+ came back to this a week or two weeks later and getting an error when i try to navigate to the log in page. 
+
+ XHRGET
+https://ka-f.fontawesome.com/releases/v6.4.2/css/free.min.css?token=56d9069709
+
+XHRGET
+https://ka-f.fontawesome.com/releases/v6.4.2/css/free-v4-shims.min.css?token=56d9069709
+
+XHRGET
+https://ka-f.fontawesome.com/releases/v6.4.2/css/free-v5-font-face.min.css?token=56d9069709
+[HTTP/3 200 OK 0ms]
+
+XHRGET
+https://ka-f.fontawesome.com/releases/v6.4.2/css/free-v4-font-face.min.css?token=56d9069709
+[HTTP/3 200 OK 0ms]
+
+[vite] connecting... client.ts:18:8
+[vite] connected. client.ts:150:14
+Use of drawWindow method from CanvasRenderingContext2D is deprecated. Use tabs.captureTab extensions API instead https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/tabs/captureTab pagedata-script.js:1:12509
+Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).
+    _FirebaseError errors.ts:85
+    create errors.ts:121
+    createErrorInternal assert.ts:142
+    _assert assert.ts:167
+    registerAuth register.ts:71
+    getOrInitializeService provider.ts:318
+    initialize provider.ts:242
+    initializeAuth initialize.ts:66
+    getAuth index.ts:80
+    LoginForm LoginForm.tsx:33
+    React 16
+    setState index.tsx:427
+    push history.ts:664
+    navigate hooks.tsx:243
+    useLinkClickHandler index.tsx:962
+    handleClick index.tsx:583
+    React 23
+    <anonymous> main.tsx:10
+errors.ts:85:4
+Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).
+    _FirebaseError errors.ts:85
+    create errors.ts:121
+    createErrorInternal assert.ts:142
+    _assert assert.ts:167
+    registerAuth register.ts:71
+    getOrInitializeService provider.ts:318
+    initialize provider.ts:242
+    initializeAuth initialize.ts:66
+    getAuth index.ts:80
+    LoginForm LoginForm.tsx:33
+    React 17
+    setState index.tsx:427
+    push history.ts:664
+    navigate hooks.tsx:243
+    useLinkClickHandler index.tsx:962
+    handleClick index.tsx:583
+    React 23
+    <anonymous> main.tsx:10
+errors.ts:85:4
+The above error occurred in the <LoginForm> component:
+
+LoginForm@http://localhost:5173/src/pages/Auth/forms/LoginForm.tsx:38:14
+div
+node_modules/@emotion/react/dist/emotion-element-c39617d8.browser.esm.js/withEmotionCache2/<@http://localhost:5173/node_modules/.vite/deps/chunk-KUA6F7W4.js?v=d1bf65a1:3280:50
+Box3@http://localhost:5173/node_modules/.vite/deps/chunk-KUA6F7W4.js?v=d1bf65a1:6078:35
+main
+node_modules/@emotion/react/dist/emotion-element-c39617d8.browser.esm.js/withEmotionCache2/<@http://localhost:5173/node_modules/.vite/deps/chunk-KUA6F7W4.js?v=d1bf65a1:3280:50
+Container3@http://localhost:5173/node_modules/.vite/deps/chunk-KUA6F7W4.js?v=d1bf65a1:7552:33
+LoginPage
+RenderedRoute@http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=d1bf65a1:3333:7
+Routes@http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=d1bf65a1:3773:7
+App
+Provider@http://localhost:5173/node_modules/.vite/deps/react-redux.js?v=d1bf65a1:1084:18
+Router@http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=d1bf65a1:3724:7
+HashRouter@http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=d1bf65a1:4236:7
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries. localhost:5173:12966:25
+Uncaught FirebaseError: Firebase: Error (auth/invalid-api-key).
+    _FirebaseError errors.ts:85
+    create errors.ts:121
+    createErrorInternal assert.ts:142
+    _assert assert.ts:167
+    registerAuth register.ts:71
+    getOrInitializeService provider.ts:318
+    initialize provider.ts:242
+    initializeAuth initialize.ts:66
+    getAuth index.ts:80
+    LoginForm LoginForm.tsx:33
+    React 14
+    setState index.tsx:427
+    push history.ts:664
+    navigate hooks.tsx:243
+    useLinkClickHandler index.tsx:962
+    handleClick index.tsx:583
+    React 23
+    <anonymous> main.tsx:10
+errors.ts:85:4
+Source map error: Error: request failed with status 404
+Resource URL: null
+Source Map URL: react_devtools_backend_compact.js.map
+

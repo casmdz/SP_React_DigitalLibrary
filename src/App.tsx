@@ -10,13 +10,13 @@ import routes from "./config/routes";
 import BookshelfPage from "./pages/Bookshelf/BookshelfPage";
 
 import { initializeApp } from "firebase/app";
-import { config } from "./config/firebaseConfig";
+import { config } from "./config/firebaseConfig"
 import Testpage from "./pages/Auth/Testpage";
 import AuthRoute from "./auth/AuthRoute";
 import ProfilePage from "./pages/Profile/ProfilePage";
 
 export const Firebase = initializeApp(config.firebaseConfig);
-// export const Firebase = initializeApp(config.firebaseConfig)
+// export const Firebase = initializeApp(firebaseConfig);
 
 function App() {
   return (
